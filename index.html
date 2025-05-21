@@ -2,17 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>Palette Swap Viewer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Palette-Swapped Image</title>
   <style>
     body {
       margin: 0;
       background: #111;
+      color: white;
+      font-family: sans-serif;
     }
-    canvas {
-      position: absolute;
+
+    .top-bar {
+      position: fixed;
       top: 0;
       right: 0;
+      background: #222;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      z-index: 1000;
+    }
+
+    .top-bar label {
+      font-size: 1rem;
+    }
+
+    .top-bar select {
+      font-size: 1rem;
+      padding: 0.25rem 0.5rem;
+    }
+
+    canvas {
+      position: absolute;
+      top: 4rem; /* just below the top-bar */
+      right: 1rem;
       max-width: 25vw;
       max-height: 25vh;
       border: 1px solid #ccc;
@@ -21,39 +47,63 @@
   </style>
 </head>
 <body>
+  <div class="top-bar">
+    <label for="rotation">Palette Rotation:</label>
+    <select id="rotation">
+      <option value="none">No Change</option>
+      <option value="cw">Clockwise (R→G→B→R)</option>
+      <option value="ccw">Counterclockwise (R←G←B←R)</option>
+    </select>
+  </div>
+
   <canvas id="canvas"></canvas>
 
   <script>
     const img = new Image();
-    img.crossOrigin = "anonymous"; // Allow external image if hosted with CORS headers
+    img.crossOrigin = "anonymous";
+    img.src = "rgb_template.png"; // Replace with your actual image filename
 
-    // Replace with your actual image file name (in the same directory as index.html)
-    img.src = "rgb_template.png";
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const selector = document.getElementById('rotation');
 
-    img.onload = () => {
-      const canvas = document.getElementById('canvas');
-      canvas.width = img.width;
-      canvas.height = img.height;
-
-      const ctx = canvas.getContext('2d');
+    function applyPaletteSwap(mode) {
       ctx.drawImage(img, 0, 0);
+      if (mode === 'none') return;
 
       const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
       const data = imageData.data;
 
       for (let i = 0; i < data.length; i += 4) {
-        const red = data[i];     // R
-        const green = data[i+1]; // G
-        const blue = data[i+2];  // B
+        const r = data[i];
+        const g = data[i + 1];
+        const b = data[i + 2];
 
-        // Palette swap: R→G, G→B, B→R
-        data[i] = green;   // New R
-        data[i+1] = blue;  // New G
-        data[i+2] = red;   // New B
+        if (mode === 'cw') {
+          // R -> G, G -> B, B -> R
+          data[i] = g;
+          data[i + 1] = b;
+          data[i + 2] = r;
+        } else if (mode === 'ccw') {
+          // R -> B, G -> R, B -> G
+          data[i] = b;
+          data[i + 1] = r;
+          data[i + 2] = g;
+        }
       }
 
       ctx.putImageData(imageData, 0, 0);
+    }
+
+    img.onload = () => {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      applyPaletteSwap(selector.value);
     };
+
+    selector.addEventListener('change', () => {
+      applyPaletteSwap(selector.value);
+    });
   </script>
 </body>
 </html>
