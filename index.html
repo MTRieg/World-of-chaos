@@ -70,13 +70,22 @@
       palettes = paletteData;
       mappings = mappingData;
 
-      // Populate dropdown
+      // Add 'Original' option
+      const originalOption = document.createElement('option');
+      originalOption.value = -1;
+      originalOption.textContent = "Original";
+      selector.appendChild(originalOption);
+      
+      // Populate remaining options
       mappings.forEach((map, i) => {
         const option = document.createElement('option');
         option.value = i;
         option.textContent = map.name;
         selector.appendChild(option);
       });
+      
+      // Set 'Original' as default
+      selector.value = -1;
 
       // Set default selection to first item
       selector.value = "0";
@@ -95,7 +104,7 @@
         console.log(`Top-left pixel: R=${testPixel[0]}, G=${testPixel[1]}, B=${testPixel[2]}`);
 
         // Apply first mapping
-        applyPaletteMapping(0);
+        applyPaletteMapping(parseInt(selector.value));
       };
     });
 
@@ -143,7 +152,7 @@
 
     function applyPaletteMapping(mappingIndex) {
       ctx.drawImage(img, 0, 0);
-      if (!palettes || !mappings) return;
+      if (mapingIndex === -1 || !palettes || !mappings) return;
 
       const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
       const data = imageData.data;
