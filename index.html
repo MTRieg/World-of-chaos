@@ -52,8 +52,27 @@
 
   <script>
     const img = new Image();
-    img.crossOrigin = "anonymous";
-    img.src = "rgb_template.png"; // Replace with your image filename
+    img.src = "rgb_template.png"; // or the correct path
+    img.crossOrigin = "anonymous"; // Optional, good practice
+    
+    img.onload = () => {
+      // Set canvas sizes
+      canvas.width = img.width;
+      canvas.height = img.height;
+      hiddenCanvas.width = img.width;
+      hiddenCanvas.height = img.height;
+    
+      // Draw image to both canvases
+      ctx.drawImage(img, 0, 0);
+      hiddenCtx.drawImage(img, 0, 0);
+    
+      // Debug: log the top-left pixel from hidden canvas
+      const testPixel = hiddenCtx.getImageData(0, 0, 1, 1).data;
+      console.log(`Top-left pixel: R=${testPixel[0]}, G=${testPixel[1]}, B=${testPixel[2]}`);
+    
+      // Apply the default palette mapping (or none)
+      applyPaletteMapping(parseInt(selector.value));
+    };
 
     const canvas = document.getElementById('canvas');
     const hiddenCanvas = document.getElementById('hiddenCanvas');
@@ -80,24 +99,6 @@
         option.textContent = map.name;
         selector.appendChild(option);
       });
-
-     img.onload = () => {
-      // Set canvas sizes
-      canvas.width = img.width;
-      canvas.height = img.height;
-      hiddenCanvas.width = img.width;
-      hiddenCanvas.height = img.height;
-    
-      // Draw the original image to both visible and hidden canvas
-      ctx.drawImage(img, 0, 0);
-      hiddenCtx.drawImage(img, 0, 0);
-
-      const testPixel = hiddenCtx.getImageData(0, 0, 1, 1).data;
-      console.log(`Top-left pixel after loading: (${testPixel[0]}, ${testPixel[1]}, ${testPixel[2]})`);
-    
-      // Now apply initial palette swap if needed
-      applyPaletteMapping(parseInt(selector.value));
-    };
 
       selector.addEventListener('change', () => {
         applyPaletteMapping(parseInt(selector.value));
