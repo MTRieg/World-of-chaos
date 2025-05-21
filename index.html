@@ -3,31 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Palette Swapped Image</title>
+  <title>Palette-Swapped Image</title>
   <style>
     body {
+      margin: 0;
       background: #111;
-      color: white;
-      font-family: sans-serif;
-      text-align: center;
-      padding: 2rem;
     }
     canvas {
-      max-width: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      max-width: 25vw;
+      max-height: 25vh;
       border: 1px solid #ccc;
       border-radius: 8px;
     }
   </style>
 </head>
 <body>
-  <h1>Palette-Swapped Image</h1>
   <canvas id="canvas"></canvas>
 
   <script>
     const img = new Image();
-    img.crossOrigin = "anonymous"; // allow loading from other domains (if permitted)
+    img.crossOrigin = "anonymous"; // Allow external image if hosted with CORS headers
 
-    // 🔁 Replace this with your actual image URL
+    // Replace with your actual image file name (in the same directory as index.html)
     img.src = "rgb_template.png";
 
     img.onload = () => {
@@ -50,7 +50,6 @@
         data[i] = green;   // New R
         data[i+1] = blue;  // New G
         data[i+2] = red;   // New B
-        // Alpha remains the same (data[i+3])
       }
 
       ctx.putImageData(imageData, 0, 0);
