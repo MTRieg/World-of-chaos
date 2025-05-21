@@ -81,16 +81,20 @@
         selector.appendChild(option);
       });
 
-      img.onload = () => {
-        canvas.width = img.width;
-        canvas.height = img.height;
-        hiddenCanvas.width = img.width;
-        hiddenCanvas.height = img.height;
-      
-        ctx.drawImage(img, 0, 0);         // Draw to visible canvas
-        hiddenCtx.drawImage(img, 0, 0);   // Save original pixel data
-        applyPaletteMapping(parseInt(selector.value) || 0);
-      };
+     img.onload = () => {
+      // Set canvas sizes
+      canvas.width = img.width;
+      canvas.height = img.height;
+      hiddenCanvas.width = img.width;
+      hiddenCanvas.height = img.height;
+    
+      // Draw the original image to both visible and hidden canvas
+      ctx.drawImage(img, 0, 0);
+      hiddenCtx.drawImage(img, 0, 0);
+    
+      // Now apply initial palette swap if needed
+      applyPaletteMapping(parseInt(selector.value));
+    };
 
       selector.addEventListener('change', () => {
         applyPaletteMapping(parseInt(selector.value));
@@ -101,7 +105,7 @@
         const y = Math.floor(e.clientY - rect.top);
       
         const pixel = hiddenCtx.getImageData(x, y, 1, 1).data;
-        const [r, g, b] = [pixel[0], pixel[1], 255;
+        const [r, g, b] = [pixel[0], pixel[1], pixel[2]];
       
         // Try to match the clicked color with an input palette color
         const clickedIndex = palettes.input.findIndex(([ri, gi, bi]) =>
