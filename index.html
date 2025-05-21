@@ -91,6 +91,9 @@
       // Draw the original image to both visible and hidden canvas
       ctx.drawImage(img, 0, 0);
       hiddenCtx.drawImage(img, 0, 0);
+
+      const testPixel = hiddenCtx.getImageData(0, 0, 1, 1).data;
+      console.log(`Top-left pixel after loading: (${testPixel[0]}, ${testPixel[1]}, ${testPixel[2]})`);
     
       // Now apply initial palette swap if needed
       applyPaletteMapping(parseInt(selector.value));
