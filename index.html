@@ -84,6 +84,37 @@
       selector.addEventListener('change', () => {
         applyPaletteMapping(parseInt(selector.value));
       });
+      canvas.addEventListener('click', function (e) {
+        const rect = canvas.getBoundingClientRect();
+        const x = Math.floor(e.clientX - rect.left);
+        const y = Math.floor(e.clientY - rect.top);
+      
+        const pixel = ctx.getImageData(x, y, 1, 1).data;
+        const [r, g, b] = [pixel[0], pixel[1], pixel[2]];
+      
+        // Try to match the clicked color with an input palette color
+        const clickedIndex = palettes.input.findIndex(([ri, gi, bi]) =>
+          colorsMatch(r, g, b, ri, gi, bi, 40)
+        );
+      
+        if (clickedIndex !== -1) {
+          console.log(`Clicked color matched input palette index ${clickedIndex}`);
+      
+          // Find the first mapping that maps input[0] to that index
+          const foundIndex = mappings.findIndex(mapping =>
+            mapping.mapping[0] === clickedIndex
+          );
+      
+          if (foundIndex !== -1) {
+            selector.value = foundIndex;
+            applyPaletteMapping(foundIndex);
+          } else {
+            console.warn("No mapping found that starts with that input color.");
+          }
+        } else {
+          console.warn("Clicked color does not match any input palette color.");
+        }
+      });
     });
 
     function colorsMatch(r1, g1, b1, r2, g2, b2, threshold = 40) {
