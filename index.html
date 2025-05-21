@@ -54,7 +54,7 @@
     img.src = "rgb_template.png"; // Replace with your image filename
 
     const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
     const selector = document.getElementById('mode');
 
     let palettes = null;
@@ -86,12 +86,11 @@
       });
     });
 
-    function colorsMatch(r1, g1, b1, r2, g2, b2) {
-      const threshold = 10; // Adjust if needed
+    function colorsMatch(r1, g1, b1, r2, g2, b2, threshold = 40) {
       return (
-        Math.abs(r1 - r2) < threshold &&
-        Math.abs(g1 - g2) < threshold &&
-        Math.abs(b1 - b2) < threshold
+        Math.abs(r1 - r2) <= threshold &&
+        Math.abs(g1 - g2) <= threshold &&
+        Math.abs(b1 - b2) <= threshold
       );
     }
 
@@ -104,12 +103,13 @@
 
       const inputPalette = palettes.input;
       const outputPalette = mappings[mappingIndex].mapping.map(i => palettes.output[i]);
-
+      let matchedAny = false;
+      
       for (let i = 0; i < data.length; i += 4) {
         const r = data[i];
         const g = data[i + 1];
         const b = data[i + 2];
-
+      
         for (let j = 0; j < inputPalette.length; j++) {
           const [ri, gi, bi] = inputPalette[j];
           if (colorsMatch(r, g, b, ri, gi, bi)) {
@@ -117,9 +117,14 @@
             data[i] = ro;
             data[i + 1] = go;
             data[i + 2] = bo;
+            matchedAny = true;
             break;
           }
         }
+      }
+      
+      if (!matchedAny) {
+        console.warn("No matching colors found. Check input palette or color similarity threshold.");
       }
 
       ctx.putImageData(imageData, 0, 0);
