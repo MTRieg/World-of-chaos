@@ -48,13 +48,19 @@
 
   <canvas id="canvas"></canvas>
 
+  <canvas id="hiddenCanvas" style="display: none;"></canvas>
+
   <script>
     const img = new Image();
     img.crossOrigin = "anonymous";
     img.src = "rgb_template.png"; // Replace with your image filename
 
     const canvas = document.getElementById('canvas');
+    const hiddenCanvas = document.getElementById('hiddenCanvas');
+    
     const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    const hiddenCtx = hiddenCanvas.getContext('2d', { willReadFrequently: true });
+      
     const selector = document.getElementById('mode');
 
     let palettes = null;
@@ -78,7 +84,12 @@
       img.onload = () => {
         canvas.width = img.width;
         canvas.height = img.height;
-        applyPaletteMapping(0); // Default to first mapping
+        hiddenCanvas.width = img.width;
+        hiddenCanvas.height = img.height;
+      
+        ctx.drawImage(img, 0, 0);         // Draw to visible canvas
+        hiddenCtx.drawImage(img, 0, 0);   // Save original pixel data
+        applyPaletteMapping(parseInt(selector.value) || 0);
       };
 
       selector.addEventListener('change', () => {
@@ -89,7 +100,7 @@
         const x = Math.floor(e.clientX - rect.left);
         const y = Math.floor(e.clientY - rect.top);
       
-        const pixel = ctx.getImageData(x, y, 1, 1).data;
+        const pixel = hiddenCtx.getImageData(x, y, 1, 1).data;
         const [r, g, b] = [pixel[0], pixel[1], pixel[2]];
       
         // Try to match the clicked color with an input palette color
