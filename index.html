@@ -15,12 +15,12 @@
     .top-bar {
       position: fixed;
       top: 0;
-      right: 0;
+      left: 0;
       background: #222;
       padding: 1rem;
       display: flex;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: flex-start;
       gap: 1rem;
       box-shadow: 0 2px 4px rgba(0,0,0,0.5);
       z-index: 1000;
@@ -38,7 +38,7 @@
     canvas {
       position: absolute;
       top: 4rem; /* just below the top-bar */
-      right: 1rem;
+      left: 1rem;
       max-width: 25vw;
       max-height: 25vh;
       border: 1px solid #ccc;
@@ -80,15 +80,13 @@
         const b = data[i + 2];
 
         if (mode === 'cw') {
-          // R -> G, G -> B, B -> R
-          data[i] = g;
-          data[i + 1] = b;
-          data[i + 2] = r;
+          data[i] = g;      // R <- G
+          data[i + 1] = b;  // G <- B
+          data[i + 2] = r;  // B <- R
         } else if (mode === 'ccw') {
-          // R -> B, G -> R, B -> G
-          data[i] = b;
-          data[i + 1] = r;
-          data[i + 2] = g;
+          data[i] = b;      // R <- B
+          data[i + 1] = r;  // G <- R
+          data[i + 2] = g;  // B <- G
         }
       }
 
