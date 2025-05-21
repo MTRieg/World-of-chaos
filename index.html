@@ -3,26 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>My Image Page</title>
+  <title>Palette Swapped Image</title>
   <style>
     body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      background-color: #f2f2f2;
+      background: #111;
+      color: white;
       font-family: sans-serif;
+      text-align: center;
+      padding: 2rem;
     }
-    img {
-      max-width: 90%;
-      max-height: 90%;
-      border: 2px solid #ccc;
+    canvas {
+      max-width: 100%;
+      border: 1px solid #ccc;
       border-radius: 8px;
     }
   </style>
 </head>
 <body>
-  <img src="https://ti4.westaddisonheavyindustries.com/map/pbd1001/2023-10-05T14%3A19%3A03.495618314.png" alt="Your Image">
+  <h1>Palette-Swapped Image</h1>
+  <canvas id="canvas"></canvas>
+
+  <script>
+    const img = new Image();
+    img.crossOrigin = "anonymous"; // allow loading from other domains (if permitted)
+
+    // 🔁 Replace this with your actual image URL
+    img.src = "https://stock.adobe.com/204263834";
+
+    img.onload = () => {
+      const canvas = document.getElementById('canvas');
+      canvas.width = img.width;
+      canvas.height = img.height;
+
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imageData.data;
+
+      for (let i = 0; i < data.length; i += 4) {
+        const red = data[i];     // R
+        const green = data[i+1]; // G
+        const blue = data[i+2];  // B
+
+        // Palette swap: R→G, G→B, B→R
+        data[i] = green;   // New R
+        data[i+1] = blue;  // New G
+        data[i+2] = red;   // New B
+        // Alpha remains the same (data[i+3])
+      }
+
+      ctx.putImageData(imageData, 0, 0);
+    };
+  </script>
 </body>
 </html>
