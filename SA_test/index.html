@@ -116,7 +116,7 @@
       console.log(`Clicked color: (${r}, ${g}, ${b})`);
 
       const clickedIndex = palettes.input.findIndex(([ri, gi, bi]) =>
-        colorsMatch(r, g, b, ri, gi, bi, 40)
+        colorsMatch(r, g, b, ri, gi, bi)
       );
 
       if (clickedIndex !== -1) {
