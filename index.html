@@ -47,40 +47,18 @@
   </div>
 
   <canvas id="canvas"></canvas>
-
   <canvas id="hiddenCanvas" style="display: none;"></canvas>
 
   <script>
-    const img = new Image();
-    img.src = "rgb_template.png"; // or the correct path
-    img.crossOrigin = "anonymous"; // Optional, good practice
-    
-    img.onload = () => {
-      // Set canvas sizes
-      canvas.width = img.width;
-      canvas.height = img.height;
-      hiddenCanvas.width = img.width;
-      hiddenCanvas.height = img.height;
-    
-      // Draw image to both canvases
-      ctx.drawImage(img, 0, 0);
-      hiddenCtx.drawImage(img, 0, 0);
-    
-      // Debug: log the top-left pixel from hidden canvas
-      const testPixel = hiddenCtx.getImageData(0, 0, 1, 1).data;
-      console.log(`Top-left pixel: R=${testPixel[0]}, G=${testPixel[1]}, B=${testPixel[2]}`);
-    
-      // Apply the default palette mapping (or none)
-      applyPaletteMapping(parseInt(selector.value));
-    };
-
     const canvas = document.getElementById('canvas');
     const hiddenCanvas = document.getElementById('hiddenCanvas');
-    
     const ctx = canvas.getContext('2d', { willReadFrequently: true });
     const hiddenCtx = hiddenCanvas.getContext('2d', { willReadFrequently: true });
-      
     const selector = document.getElementById('mode');
+
+    const img = new Image();
+    img.src = "rgb_template.png"; // or correct path
+    img.crossOrigin = "anonymous";
 
     let palettes = null;
     let mappings = null;
@@ -100,40 +78,59 @@
         selector.appendChild(option);
       });
 
-      selector.addEventListener('change', () => {
-        applyPaletteMapping(parseInt(selector.value));
-      });
-      canvas.addEventListener('click', function (e) {
-        const rect = canvas.getBoundingClientRect();
-        const x = Math.floor(e.clientX - rect.left);
-        const y = Math.floor(e.clientY - rect.top);
-      
-        const pixel = hiddenCtx.getImageData(x, y, 1, 1).data;
-        const [r, g, b] = [pixel[0], pixel[1], pixel[2]];
-      
-        // Try to match the clicked color with an input palette color
-        const clickedIndex = palettes.input.findIndex(([ri, gi, bi]) =>
-          colorsMatch(r, g, b, ri, gi, bi, 40)
+      // Set default selection to first item
+      selector.value = "0";
+
+      // Now that mappings are ready, wait for image to load
+      img.onload = () => {
+        canvas.width = img.width;
+        canvas.height = img.height;
+        hiddenCanvas.width = img.width;
+        hiddenCanvas.height = img.height;
+
+        ctx.drawImage(img, 0, 0);
+        hiddenCtx.drawImage(img, 0, 0);
+
+        const testPixel = hiddenCtx.getImageData(0, 0, 1, 1).data;
+        console.log(`Top-left pixel: R=${testPixel[0]}, G=${testPixel[1]}, B=${testPixel[2]}`);
+
+        // Apply first mapping
+        applyPaletteMapping(0);
+      };
+    });
+
+    selector.addEventListener('change', () => {
+      applyPaletteMapping(parseInt(selector.value));
+    });
+
+    canvas.addEventListener('click', function (e) {
+      const rect = canvas.getBoundingClientRect();
+      const x = Math.floor(e.clientX - rect.left);
+      const y = Math.floor(e.clientY - rect.top);
+
+      const pixel = hiddenCtx.getImageData(x, y, 1, 1).data;
+      const [r, g, b] = [pixel[0], pixel[1], pixel[2]];
+      console.log(`Clicked color: (${r}, ${g}, ${b})`);
+
+      const clickedIndex = palettes.input.findIndex(([ri, gi, bi]) =>
+        colorsMatch(r, g, b, ri, gi, bi, 40)
+      );
+
+      if (clickedIndex !== -1) {
+        console.log(`Clicked color matched input palette index ${clickedIndex}`);
+        const foundIndex = mappings.findIndex(mapping =>
+          mapping.mapping[0] === clickedIndex
         );
-      
-        if (clickedIndex !== -1) {
-          console.log(`Clicked color matched input palette index ${clickedIndex}`);
-      
-          // Find the first mapping that maps input[0] to that index
-          const foundIndex = mappings.findIndex(mapping =>
-            mapping.mapping[0] === clickedIndex
-          );
-      
-          if (foundIndex !== -1) {
-            selector.value = foundIndex;
-            applyPaletteMapping(foundIndex);
-          } else {
-            console.warn("No mapping found that starts with that input color.");
-          }
+
+        if (foundIndex !== -1) {
+          selector.value = foundIndex;
+          applyPaletteMapping(foundIndex);
         } else {
-          console.warn(`Clicked color (${r}, ${g}, ${b}) does not match any input palette color.`);
+          console.warn("No mapping found that starts with that input color.");
         }
-      });
+      } else {
+        console.warn(`Clicked color (${r}, ${g}, ${b}) does not match any input palette color.`);
+      }
     });
 
     function colorsMatch(r1, g1, b1, r2, g2, b2, threshold = 40) {
@@ -153,13 +150,14 @@
 
       const inputPalette = palettes.input;
       const outputPalette = mappings[mappingIndex].mapping.map(i => palettes.output[i]);
+
       let matchedAny = false;
-      
+
       for (let i = 0; i < data.length; i += 4) {
         const r = data[i];
         const g = data[i + 1];
         const b = data[i + 2];
-      
+
         for (let j = 0; j < inputPalette.length; j++) {
           const [ri, gi, bi] = inputPalette[j];
           if (colorsMatch(r, g, b, ri, gi, bi)) {
@@ -172,7 +170,7 @@
           }
         }
       }
-      
+
       if (!matchedAny) {
         console.warn("No matching colors found. Check input palette or color similarity threshold.");
       }
