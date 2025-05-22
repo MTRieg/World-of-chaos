@@ -60,6 +60,27 @@
     img.src = "South_America.png"; // or correct path
     img.crossOrigin = "anonymous";
 
+    // Now that mappings are ready, wait for image to load
+    img.onload = () => {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      hiddenCanvas.width = img.width;
+      hiddenCanvas.height = img.height;
+
+      ctx.drawImage(img, 0, 0);
+      hiddenCtx.drawImage(img, 0, 0);
+
+      const testPixel = hiddenCtx.getImageData(0, 0, 1, 1).data;
+      console.log(`Top-left pixel: R=${testPixel[0]}, G=${testPixel[1]}, B=${testPixel[2]}`);
+
+      // Apply first mapping
+      applyPaletteMapping(-1);
+    };
+
+    if (img.complete) {
+      img.onload(); // image was already loaded from cache
+    }
+
     let palettes = null;
     let mappings = null;
 
@@ -87,23 +108,9 @@
       // Set 'Original' as default
       selector.value = -1;
 
-      // Now that mappings are ready, wait for image to load
-      img.onload = () => {
-        canvas.width = img.width;
-        canvas.height = img.height;
-        hiddenCanvas.width = img.width;
-        hiddenCanvas.height = img.height;
-
-        ctx.drawImage(img, 0, 0);
-        hiddenCtx.drawImage(img, 0, 0);
-
-        const testPixel = hiddenCtx.getImageData(0, 0, 1, 1).data;
-        console.log(`Top-left pixel: R=${testPixel[0]}, G=${testPixel[1]}, B=${testPixel[2]}`);
-
-        // Apply first mapping
-        applyPaletteMapping(-1);
-      };
+      
     });
+    
 
     selector.addEventListener('change', () => {
       applyPaletteMapping(parseInt(selector.value));
