@@ -118,8 +118,10 @@
 
     canvas.addEventListener('click', function (e) {
       const rect = canvas.getBoundingClientRect();
-      const x = Math.floor(e.clientX - rect.left);
-      const y = Math.floor(e.clientY - rect.top);
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+      const x = Math.floor((e.clientX - rect.left) * scaleX);
+      const y = Math.floor((e.clientY - rect.top) * scaleY);
     
       const pixel = hiddenCtx.getImageData(x, y, 1, 1).data;
       const [r, g, b] = [pixel[0], pixel[1], pixel[2]];
