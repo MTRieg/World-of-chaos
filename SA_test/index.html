@@ -157,16 +157,15 @@
       const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
       const data = imageData.data;
 
-      if(mappingIndex === 1){
+      if(mappingIndex === -1){
         for (let i = 0; i < data.length; i += 4) {
           const r = data[i];
           const g = data[i + 1];
           const b = data[i + 2];
 
-          const [ro, go, bo] = outputPalette[j];
-          data[i] = ro;
-          data[i + 1] = go;
-          data[i + 2] = bo;
+          data[i] = r;
+          data[i + 1] = g;
+          data[i + 2] = b;
           
         }
         ctx.putImageData(imageData, 0, 0);
