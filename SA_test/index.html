@@ -62,12 +62,6 @@
     img.src = "South_America.png"; // or correct path
     img.crossOrigin = "anonymous";
 
-    loadDataAndSetup();
-
-    document.getElementById('refreshBtn').addEventListener('click', () => {
-      loadDataAndSetup();
-    });
-
     // Now that mappings are ready, wait for image to load
     img.onload = () => {
       canvas.width = img.width;
@@ -90,50 +84,57 @@
     let palettes = null;
     let mappings = null;
 
-    function loadDataAndSetup() {
-      Promise.all([
-        fetch('palettes.json').then(r => r.json()),
-        fetch('mappings.json').then(r => r.json())
-      ]).then(([paletteData, mappingData]) => {
-        palettes = paletteData;
-        mappings = mappingData;
-    
-        // Clear and repopulate dropdown
-        selector.innerHTML = '';
-    
-        // Add 'Original' option
-        const originalOption = document.createElement('option');
-        originalOption.value = -1;
-        originalOption.textContent = "Original";
-        selector.appendChild(originalOption);
-    
-        // Populate remaining options
-        mappings.forEach((map, i) => {
-          const option = document.createElement('option');
-          option.value = i;
-          option.textContent = map.name;
-          selector.appendChild(option);
-        });
-    
-        // Set default selection to 'Original'
-        selector.value = -1;
-    
-        // Redraw image
-        img.onload = () => {
-          canvas.width = img.width;
-          canvas.height = img.height;
-          hiddenCanvas.width = img.width;
-          hiddenCanvas.height = img.height;
-    
-          ctx.drawImage(img, 0, 0);
-          hiddenCtx.drawImage(img, 0, 0);
-    
-          applyPaletteMapping(-1); // Show original
-        };
-    
-        img.src = 'rgb_template.png';
+    Promise.all([
+      fetch('palettes.json').then(r => r.json()),
+      fetch('mappings.json').then(r => r.json())
+    ]).then(([paletteData, mappingData]) => {
+      palettes = paletteData;
+      mappings = mappingData;
+
+      // Add 'Original' option
+      const originalOption = document.createElement('option');
+      originalOption.value = -1;
+      originalOption.textContent = "Original";
+      selector.appendChild(originalOption);
+      
+      // Populate remaining options
+      mappings.forEach((map, i) => {
+        const option = document.createElement('option');
+        option.value = i;
+        option.textContent = map.name;
+        selector.appendChild(option);
       });
-    }
+      
+      // Set 'Original' as default
+      selector.value = -1;
+
+      canvas.addEventListener('click', function (e) {
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        const x = Math.floor((e.clientX - rect.left) * scaleX);
+        const y = Math.floor((e.clientY - rect.top) * scaleY);
+      
+        const pixel = hiddenCtx.getImageData(x, y, 1, 1).data;
+        const [r, g, b] = [pixel[0], pixel[1], pixel[2]];
+        console.log(`Clicked color: (${r}, ${g}, ${b})`);
+      
+        const clickedIndex = palettes.input.findIndex(([ri, gi, bi]) =>
+          colorsMatch(r, g, b, ri, gi, bi)
+        );
+      
+        if (clickedIndex !== -1) {
+          console.log(`Clicked color matched input palette index ${clickedIndex}`);
+          selector.value = clickedIndex;
+          applyPaletteMapping(clickedIndex);
+        } else {
+          console.warn(`Clicked color (${r}, ${g}, ${b}) does not match any input palette color. Reverting to Original.`);
+          selector.value = -1;
+          applyPaletteMapping(-1);
+        }
+      });
+
+    });
     
 
     selector.addEventListener('change', () => {
