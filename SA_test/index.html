@@ -74,9 +74,7 @@
 
       const testPixel = hiddenCtx.getImageData(0, 0, 1, 1).data;
       console.log(`Top-left pixel: R=${testPixel[0]}, G=${testPixel[1]}, B=${testPixel[2]}`);
-
-      // Apply first mapping
-      // applyPaletteMapping(-1);
+      
     };
 
     if (img.complete) {
@@ -110,7 +108,29 @@
       // Set 'Original' as default
       selector.value = -1;
 
+      canvas.addEventListener('click', function (e) {
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        const x = Math.floor((e.clientX - rect.left) * scaleX);
+        const y = Math.floor((e.clientY - rect.top) * scaleY);
       
+        const pixel = hiddenCtx.getImageData(x, y, 1, 1).data;
+        const [r, g, b] = [pixel[0], pixel[1], pixel[2]];
+        console.log(`Clicked color: (${r}, ${g}, ${b})`);
+      
+        const clickedIndex = palettes.input.findIndex(([ri, gi, bi]) =>
+          colorsMatch(r, g, b, ri, gi, bi)
+        );
+      
+        if (clickedIndex !== -1) {
+          console.log(`Clicked color matched input palette index ${clickedIndex}`);
+          selector.value = clickedIndex;
+          applyPaletteMapping(clickedIndex);
+        } else {
+          console.warn(`Clicked color (${r}, ${g}, ${b}) does not match any input palette color.`);
+        }
+      });
     });
     
 
@@ -118,29 +138,7 @@
       applyPaletteMapping(parseInt(selector.value));
     });
 
-    canvas.addEventListener('click', function (e) {
-      const rect = canvas.getBoundingClientRect();
-      const scaleX = canvas.width / rect.width;
-      const scaleY = canvas.height / rect.height;
-      const x = Math.floor((e.clientX - rect.left) * scaleX);
-      const y = Math.floor((e.clientY - rect.top) * scaleY);
     
-      const pixel = hiddenCtx.getImageData(x, y, 1, 1).data;
-      const [r, g, b] = [pixel[0], pixel[1], pixel[2]];
-      console.log(`Clicked color: (${r}, ${g}, ${b})`);
-    
-      const clickedIndex = palettes.input.findIndex(([ri, gi, bi]) =>
-        colorsMatch(r, g, b, ri, gi, bi)
-      );
-    
-      if (clickedIndex !== -1) {
-        console.log(`Clicked color matched input palette index ${clickedIndex}`);
-        selector.value = clickedIndex;
-        applyPaletteMapping(clickedIndex);
-      } else {
-        console.warn(`Clicked color (${r}, ${g}, ${b}) does not match any input palette color.`);
-      }
-    });
 
     function colorsMatch(r1, g1, b1, r2, g2, b2, threshold = 5) {
       return (
