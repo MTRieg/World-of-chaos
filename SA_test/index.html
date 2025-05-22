@@ -128,16 +128,12 @@
           selector.value = clickedIndex;
           applyPaletteMapping(clickedIndex);
         } else {
-          console.warn(`Clicked color (${r}, ${g}, ${b}) does not match any input palette color.`);
+          console.warn(`Clicked color (${r}, ${g}, ${b}) does not match any input palette color. Reverting to Original.`);
+          selector.value = -1;
+          applyPaletteMapping(-1);
         }
       });
 
-      document.addEventListener('keydown', (event) => {
-        if (event.key.toLowerCase() === 'q') {
-          selector.value = -1; // Set dropdown to 'Original'
-          applyPaletteMapping(-1); // Apply original palette
-        }
-      });
     });
     
 
