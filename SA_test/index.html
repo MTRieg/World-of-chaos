@@ -118,32 +118,21 @@
 
     canvas.addEventListener('click', function (e) {
       const rect = canvas.getBoundingClientRect();
-      const scaleX = canvas.width / canvas.clientWidth;
-      const scaleY = canvas.height / canvas.clientHeight;
-
-      const x = Math.floor((e.clientX - rect.left) * scaleX);
-      const y = Math.floor((e.clientY - rect.top) * scaleY);
-
+      const x = Math.floor(e.clientX - rect.left);
+      const y = Math.floor(e.clientY - rect.top);
+    
       const pixel = hiddenCtx.getImageData(x, y, 1, 1).data;
       const [r, g, b] = [pixel[0], pixel[1], pixel[2]];
       console.log(`Clicked color: (${r}, ${g}, ${b})`);
-
+    
       const clickedIndex = palettes.input.findIndex(([ri, gi, bi]) =>
         colorsMatch(r, g, b, ri, gi, bi)
       );
-
+    
       if (clickedIndex !== -1) {
         console.log(`Clicked color matched input palette index ${clickedIndex}`);
-        const foundIndex = mappings.findIndex(mapping =>
-          mapping.mapping[0] === clickedIndex
-        );
-
-        if (foundIndex !== -1) {
-          selector.value = foundIndex;
-          applyPaletteMapping(foundIndex);
-        } else {
-          console.warn("No mapping found that starts with that input color.");
-        }
+        selector.value = clickedIndex;
+        applyPaletteMapping(clickedIndex);
       } else {
         console.warn(`Clicked color (${r}, ${g}, ${b}) does not match any input palette color.`);
       }
