@@ -198,53 +198,63 @@
     }
 
     function applyPaletteMapping(mappingIndex) {
-      // Reset overlay to original
-      overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
-      overlayCtx.drawImage(overlayImg, 0, 0);
+  // Reset overlay to original
+  overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+  overlayCtx.drawImage(overlayImg, 0, 0);
 
-      if (!palettes || !mappings) return;
+  if (!palettes || !mappings) return;
 
-      if(mappingIndex === -1) {
-        overlayCanvas.style.opacity = 0; // Hide overlay in Original mode
-        return;
+  if (mappingIndex === -1) {
+    overlayCanvas.style.opacity = 0; // Hide overlay in Original mode
+    return;
+  }
+
+  overlayCanvas.style.opacity = 1; // Show overlay for palette mode
+
+  const imageData = overlayCtx.getImageData(0, 0, overlayCanvas.width, overlayCanvas.height);
+  const data = imageData.data;
+
+  const inputPalette = palettes.input;
+  const outputPalette = palettes.output;
+  const currentMapping = mappings[mappingIndex].mapping; // array of 25 indices
+
+  let matchedAny = false;
+
+  for (let i = 0; i < data.length; i += 4) {
+    const r = data[i];
+    const g = data[i + 1];
+    const b = data[i + 2];
+
+    let matched = false;
+
+    // Search inputPalette for a match
+    for (let j = 0; j < inputPalette.length; j++) {
+      const [ri, gi, bi] = inputPalette[j];
+
+      if (colorsMatch(r, g, b, ri, gi, bi, 5)) {  // 5 is the threshold, adjust as needed
+        const outputIndex = currentMapping[j]; // Get mapped output index
+        const [ro, go, bo] = outputPalette[outputIndex]; // Get mapped color
+        data[i] = ro;
+        data[i + 1] = go;
+        data[i + 2] = bo;
+        matched = true;
+        matchedAny = true;
+        break;
       }
-
-      overlayCanvas.style.opacity = 1; // Show overlay for palette mode
-
-      const imageData = overlayCtx.getImageData(0, 0, overlayCanvas.width, overlayCanvas.height);
-      const data = imageData.data;
-
-      const inputPalette = palettes.input;
-      const outputPalette = mappings[mappingIndex].mapping.map(i => palettes.output[i]);
-
-      let matchedAny = false;
-
-      for (let i = 0; i < data.length; i += 4) {
-        const r = data[i];
-        const g = data[i + 1];
-        const b = data[i + 2];
-        
-          if (g*256+b!=65535) {
-            
-            j=g*256+b //this determines pallete color
-            const output_index = mappings[mappingIndex][j]
-            const [ro, go, bo] = outputPalette[output_index];
-            data[i] = ro;
-            data[i + 1] = go;
-            data[i + 2] = bo;
-            matchedAny = true;
-          }else{
-            data[i+3] = 0;
-          }
-        
-      }
-
-      if (!matchedAny) {
-        console.warn("No matching colors found. Check input palette or color similarity threshold.");
-      }
-
-      overlayCtx.putImageData(imageData, 0, 0);
     }
+
+    if (!matched) {
+      data[i + 3] = 0; // Make transparent if no match
+    }
+  }
+
+  if (!matchedAny) {
+    console.warn("No matching colors found. Check input palette or color similarity threshold.");
+  }
+
+  overlayCtx.putImageData(imageData, 0, 0);
+}
+
   </script>
 </body>
 </html>
