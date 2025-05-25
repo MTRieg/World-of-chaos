@@ -145,7 +145,10 @@
       // Set 'Original' as default
       selector.value = -1;
 
-      canvas.addEventListener('click', function (e) {
+      canvas.addEventListener('click', clicky);
+      overlayCanvas.addEventListener('click', clicky);
+
+      function clicky(){
         const rect = canvas.getBoundingClientRect();
         const scaleX = canvas.width / rect.width;
         const scaleY = canvas.height / rect.height;
@@ -171,7 +174,7 @@
           selector.value = -1;
           applyPaletteMapping(-1);
         }
-      });
+      }
 
     });
     
