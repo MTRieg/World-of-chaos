@@ -133,11 +133,14 @@
         const x = Math.floor((e.clientX - rect.left) * scaleX);
         const y = Math.floor((e.clientY - rect.top) * scaleY);
       
-        const referenceCanvas = document.getElementById('referenceCanvas');
-        const referenceCtx = referenceCanvas.getContext('2d', { willReadFrequently: true });
-        const pixel = referenceCtx.getImageData(x, y, 1, 1).data;
+        // Get context from the same canvas you clicked on
+        const ctx = canvas.getContext('2d', { willReadFrequently: true });
+
+        // Read the pixel data from the clicked coordinates
+        const pixel = ctx.getImageData(x, y, 1, 1).data;
 
         const [r, g, b] = [pixel[0], pixel[1], pixel[2]];
+
         console.log(`Clicked color: (${r}, ${g}, ${b})`);
       
         const clickedIndex = palettes.input.findIndex(([ri, gi, bi]) =>
