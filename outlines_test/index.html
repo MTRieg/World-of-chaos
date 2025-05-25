@@ -51,7 +51,6 @@
   <img id="outline" src="outline.png" alt="Outline Overlay" style="position: absolute; top: 4.05rem; left: 1.05rem; z-index: 900; pointer-events: none; max-width: calc(100vw - 1.95rem); max-height: calc(100vh - 5rem); width: auto; height: auto;"/>
 
   <canvas id="canvas"></canvas>
-  <canvas id="overlayCanvas"></canvas>
   <canvas id="hiddenCanvas" style="display: none;"></canvas>
   <canvas id="referenceCanvas" style="display: none;"></canvas>
 
@@ -72,36 +71,16 @@
     img.src = "no-outline.png"; // or correct path
     img.crossOrigin = "anonymous";
 
-    const overlayImg = new Image();
-    overlayImg.src = "overlay.png"; // Your overlay image
-    overlayImg.crossOrigin = "anonymous";
-
-    
-    const overlayCanvas = document.getElementById('overlayCanvas');
-    const overlayCtx = overlayCanvas.getContext('2d', { willReadFrequently: true });
-
     // Now that mappings are ready, wait for image to load
     img.onload = () => {
       canvas.width = img.width;
       canvas.height = img.height;
       hiddenCanvas.width = img.width;
       hiddenCanvas.height = img.height;
-      overlayCanvas.width = img.width;
-      overlayCanvas.height = img.height;
 
       ctx.drawImage(img, 0, 0);
       hiddenCtx.drawImage(img, 0, 0);
       
-    };
-
-
-    overlayImg.onload = () => {
-      overlayCtx.drawImage(overlayImg, 0, 0);
-      console.log("✅ Overlay image loaded into overlay canvas");
-
-      // Reset overlay to original
-      overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
-      overlayCtx.drawImage(overlayImg, 0, 0);
     };
 
 
@@ -119,8 +98,6 @@
 
       console.log("✅ Reference image loaded into hidden canvas");
     };
-
-
 
     let palettes = null;
     let mappings = null;
@@ -149,10 +126,7 @@
       // Set 'Original' as default
       selector.value = -1;
 
-      canvas.addEventListener('click', clicky);
-      overlayCanvas.addEventListener('click', clicky);
-
-      function clicky(e){
+      canvas.addEventListener('click', function (e) {
         const rect = canvas.getBoundingClientRect();
         const scaleX = canvas.width / rect.width;
         const scaleY = canvas.height / rect.height;
@@ -178,7 +152,7 @@
           selector.value = -1;
           applyPaletteMapping(-1);
         }
-      }
+      });
 
     });
     
@@ -198,63 +172,45 @@
     }
 
     function applyPaletteMapping(mappingIndex) {
-  // Reset overlay to original
-  overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
-  overlayCtx.drawImage(overlayImg, 0, 0);
+      ctx.drawImage(img, 0, 0);
+      if (!palettes || !mappings) return;
 
-  if (!palettes || !mappings) return;
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imageData.data;
 
-  if (mappingIndex === -1) {
-    overlayCanvas.style.opacity = 0; // Hide overlay in Original mode
-    return;
-  }
-
-  overlayCanvas.style.opacity = 1; // Show overlay for palette mode
-
-  const imageData = overlayCtx.getImageData(0, 0, overlayCanvas.width, overlayCanvas.height);
-  const data = imageData.data;
-
-  const inputPalette = palettes.input;
-  const outputPalette = palettes.output;
-  const currentMapping = mappings[mappingIndex].mapping; // array of 25 indices
-
-  let matchedAny = false;
-
-  for (let i = 0; i < data.length; i += 4) {
-    const r = data[i];
-    const g = data[i + 1];
-    const b = data[i + 2];
-
-    let matched = false;
-
-    // Search inputPalette for a match
-    for (let j = 0; j < inputPalette.length; j++) {
-      const [ri, gi, bi] = inputPalette[j];
-
-      if (colorsMatch(r, g, b, ri, gi, bi, 5)) {  // 5 is the threshold, adjust as needed
-        const outputIndex = currentMapping[j]; // Get mapped output index
-        const [ro, go, bo] = outputPalette[outputIndex]; // Get mapped color
-        data[i] = ro;
-        data[i + 1] = go;
-        data[i + 2] = bo;
-        matched = true;
-        matchedAny = true;
-        break;
+      if(mappingIndex === -1){
+        return;
       }
+      
+      const inputPalette = palettes.input;
+      const outputPalette = mappings[mappingIndex].mapping.map(i => palettes.output[i]);
+
+      let matchedAny = false;
+
+      for (let i = 0; i < data.length; i += 4) {
+        const r = data[i];
+        const g = data[i + 1];
+        const b = data[i + 2];
+
+        for (let j = 0; j < inputPalette.length; j++) {
+          const [ri, gi, bi] = inputPalette[j];
+          if (colorsMatch(r, g, b, ri, gi, bi)) {
+            const [ro, go, bo] = outputPalette[j];
+            data[i] = ro;
+            data[i + 1] = go;
+            data[i + 2] = bo;
+            matchedAny = true;
+            break;
+          }
+        }
+      }
+
+      if (!matchedAny) {
+        console.warn("No matching colors found. Check input palette or color similarity threshold.");
+      }
+
+      ctx.putImageData(imageData, 0, 0);
     }
-
-    if (!matched) {
-      data[i + 3] = 0; // Make transparent if no match
-    }
-  }
-
-  if (!matchedAny) {
-    console.warn("No matching colors found. Check input palette or color similarity threshold.");
-  }
-
-  overlayCtx.putImageData(imageData, 0, 0);
-}
-
   </script>
 </body>
 </html>
