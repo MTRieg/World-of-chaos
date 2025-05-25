@@ -148,7 +148,7 @@
       canvas.addEventListener('click', clicky);
       overlayCanvas.addEventListener('click', clicky);
 
-      function clicky(){
+      function clicky(e){
         const rect = canvas.getBoundingClientRect();
         const scaleX = canvas.width / rect.width;
         const scaleY = canvas.height / rect.height;
