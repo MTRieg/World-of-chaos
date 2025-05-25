@@ -52,6 +52,9 @@
 
   <canvas id="canvas"></canvas>
   <canvas id="hiddenCanvas" style="display: none;"></canvas>
+  <canvas id="referenceCanvas" style="display: none;"></canvas>
+
+
 
   <script>
     const canvas = document.getElementById('canvas');
@@ -59,6 +62,10 @@
     const ctx = canvas.getContext('2d', { willReadFrequently: true });
     const hiddenCtx = hiddenCanvas.getContext('2d', { willReadFrequently: true });
     const selector = document.getElementById('mode');
+
+    const referenceImg = new Image();
+    referenceImg.src = "clickable.png"; // Change this to your reference image filename
+    referenceImg.crossOrigin = "anonymous";
 
     const img = new Image();
     img.src = "no-outline.png"; // or correct path
@@ -73,9 +80,6 @@
 
       ctx.drawImage(img, 0, 0);
       hiddenCtx.drawImage(img, 0, 0);
-
-      const testPixel = hiddenCtx.getImageData(0, 0, 1, 1).data;
-      console.log("Top-left pixel: R=${testPixel[0]}, G=${testPixel[1]}, B=${testPixel[2]}");
       
     };
 
@@ -83,6 +87,17 @@
     if (img.complete) {
       img.onload(); // image was already loaded from cache
     }
+
+    referenceImg.onload = () => {
+      const referenceCanvas = document.getElementById('referenceCanvas');
+      const referenceCtx = referenceCanvas.getContext('2d', { willReadFrequently: true });
+
+      referenceCanvas.width = referenceImg.width;
+      referenceCanvas.height = referenceImg.height;
+      referenceCtx.drawImage(referenceImg, 0, 0);
+
+      console.log("✅ Reference image loaded into hidden canvas");
+    };
 
     let palettes = null;
     let mappings = null;
@@ -118,15 +133,17 @@
         const x = Math.floor((e.clientX - rect.left) * scaleX);
         const y = Math.floor((e.clientY - rect.top) * scaleY);
       
-        const pixel = hiddenCtx.getImageData(x, y, 1, 1).data;
+        const referenceCanvas = document.getElementById('referenceCanvas');
+        const referenceCtx = referenceCanvas.getContext('2d', { willReadFrequently: true });
+        const pixel = referenceCtx.getImageData(x, y, 1, 1).data;
+
         const [r, g, b] = [pixel[0], pixel[1], pixel[2]];
         console.log(`Clicked color: (${r}, ${g}, ${b})`);
       
-        const clickedIndex = palettes.input.findIndex(([ri, gi, bi]) =>
-          colorsMatch(r, g, b, ri, gi, bi)
-        );
+        const clickedIndex = 256*g+b;
+
       
-        if (clickedIndex !== -1) {
+        if (clickedIndex !== 65535) {
           console.log(`Clicked color matched input palette index ${clickedIndex}`);
           selector.value = clickedIndex;
           applyPaletteMapping(clickedIndex);
