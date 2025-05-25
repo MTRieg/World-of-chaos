@@ -140,10 +140,11 @@
         const [r, g, b] = [pixel[0], pixel[1], pixel[2]];
         console.log(`Clicked color: (${r}, ${g}, ${b})`);
       
-        const clickedIndex = 256*g+b;
-
+        const clickedIndex = palettes.input.findIndex(([ri, gi, bi]) =>
+          colorsMatch(r, g, b, ri, gi, bi)
+        );
       
-        if (clickedIndex !== 65535) {
+        if (clickedIndex !== -1) {
           console.log(`Clicked color matched input palette index ${clickedIndex}`);
           selector.value = clickedIndex;
           applyPaletteMapping(clickedIndex);
