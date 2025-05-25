@@ -98,6 +98,10 @@
     overlayImg.onload = () => {
       overlayCtx.drawImage(overlayImg, 0, 0);
       console.log("✅ Overlay image loaded into overlay canvas");
+
+      // Reset overlay to original
+      overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+      overlayCtx.drawImage(overlayImg, 0, 0);
     };
 
 
@@ -221,8 +225,10 @@
         const b = data[i + 2];
         
           if (g*256+b!=65535) {
+            
             j=g*256+b //this determines pallete color
-            const [ro, go, bo] = outputPalette[j];
+            const output_index = mappings[mappingIndex][j]
+            const [ro, go, bo] = outputPalette[output_index];
             data[i] = ro;
             data[i + 1] = go;
             data[i + 2] = bo;
