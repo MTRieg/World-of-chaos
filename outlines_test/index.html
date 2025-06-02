@@ -33,12 +33,12 @@
       position: absolute;
       top: 4rem;
       left: 1rem;
-      max-width: calc(100vw - 2rem);
+      /*max-width: calc(100vw - 2rem);
       max-height: calc(100vh - 5rem); /* Leave room for top bar */
       width: auto;
       height: auto;
-      border: 1px solid #ccc;
-      border-radius: 8px;
+      /*border: 1px solid #ccc;
+      /*border-radius: 8px;*/
     }
   </style>
 </head>
@@ -48,7 +48,7 @@
     <select id="mode"></select>
   </div>
 
-  <img id="outline" src="outline.png" alt="Outline Overlay" style="position: absolute; top: 4.05rem; left: 1.05rem; z-index: 900; pointer-events: none; max-width: calc(100vw - 1.95rem); max-height: calc(100vh - 5rem); width: auto; height: auto;"/>
+  <img id="outline" src="outline.png" alt="Outline Overlay" style="position: absolute; pointer-events: none; z-index: 900; border-radius: 0px;"/>
 
   <canvas id="canvas"></canvas>
   <canvas id="hiddenCanvas" style="display: none;"></canvas>
@@ -87,6 +87,24 @@
     if (img.complete) {
       img.onload(); // image was already loaded from cache
     }
+
+    // Sync outline.png position and size to match the canvas
+    const outlineImg = document.getElementById('outline');
+
+    function updateOverlayPosition() {
+      const rect = canvas.getBoundingClientRect();
+      outlineImg.style.top = rect.top + 'px';
+      outlineImg.style.left = rect.left + 'px';
+      outlineImg.style.width = rect.width + 'px';
+      outlineImg.style.height = rect.height + 'px';
+    }
+
+    // Initial sync
+    updateOverlayPosition();
+
+    // Also sync when the window resizes
+    window.addEventListener('resize', updateOverlayPosition);
+
 
     referenceImg.onload = () => {
       const referenceCanvas = document.getElementById('referenceCanvas');
