@@ -72,7 +72,7 @@
 
     // Load Reference Image
     const referenceImg = new Image();
-    referenceImg.src = files.referenceImage;
+    referenceImg.src = files.clickableImage;
     referenceImg.crossOrigin = "anonymous";
 
     // Load Base Image
@@ -82,7 +82,7 @@
 
     // Load Palette Overlay Image
     const palleteImg = new Image();
-    palleteImg.src = files.paletteOverlay;
+    palleteImg.src = files.SwapRefImage;
     palleteImg.crossOrigin = "anonymous";
 
     img.onload = () => {
