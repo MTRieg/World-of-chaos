@@ -1,9 +1,9 @@
 // file-names.js
 export const files = {
-  outlineImage: "./files/outline.png",
-  referenceImage: "./files/clickable.png",
-  baseImage: "./files/no-outline.png",
-  paletteOverlay: "./files/overlay.png",
+  outlineImage: "./files/outline_20250604_054122.png",
+  clickableImage: "./files/clickable_20250604_054122.png",
+  baseImage: "./files/no-outline_20250604_054122.png",
+  swapRefImage: "./files/swap-ref_20250604_054122.png",
   palettesJson: "./files/palettes.json",
-  mappingsJson: "./files/mappings.json"
+  mappingsJson: "./files/mappings_20250606_235036.json",
 };
