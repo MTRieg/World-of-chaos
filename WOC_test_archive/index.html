@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Palette Swap Viewer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      background: #111;
+      color: white;
+      font-family: sans-serif;
+    }
+
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: #222;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      z-index: 1000;
+    }
+
+    .top-bar label, select {
+      font-size: 1rem;
+    }
+
+    canvas {
+      position: absolute;
+      top: 4rem;
+      left: 1rem;
+      width: auto;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <label for="mode">Palette Mode:</label>
+    <select id="mode"></select>
+  </div>
+
+  <img id="outline" alt="Outline Overlay" style="position: absolute; pointer-events: none; z-index: 900; border-radius: 0px; top:64px; left:16px"/>
+
+  <canvas id="canvas"></canvas>
+  <canvas id="hiddenCanvas" style="display: none;"></canvas>
+  <canvas id="referenceCanvas" style="display: none;"></canvas>
+  <canvas id="palleteCanvas" style="display: none;"></canvas>
+
+  <script type="module">
+
+    
+    import { files } from './file-names.js';
+
+    const canvas = document.getElementById('canvas');
+    const hiddenCanvas = document.getElementById('hiddenCanvas');
+    const palleteCanvas = document.getElementById('palleteCanvas');
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    const hiddenCtx = hiddenCanvas.getContext('2d', { willReadFrequently: true });
+    const palleteCtx = palleteCanvas.getContext('2d', { willReadFrequently: true });
+    const selector = document.getElementById('mode');
+
+    // Load Outline Image
+    const outlineImg = document.getElementById('outline');
+    outlineImg.src = files.outlineImage;
+
+    // Load Reference Image
+    const referenceImg = new Image();
+    referenceImg.src = files.clickableImage;
+    referenceImg.crossOrigin = "anonymous";
+
+    // Load Base Image
+    const img = new Image();
+    img.src = files.baseImage;
+    img.crossOrigin = "anonymous";
+
+    // Load Palette Overlay Image
+    const palleteImg = new Image();
+    palleteImg.src = files.swapRefImage;
+    palleteImg.crossOrigin = "anonymous";
+
+    img.onload = () => {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      hiddenCanvas.width = img.width;
+      hiddenCanvas.height = img.height;
+      palleteCanvas.width = img.width;
+      palleteCanvas.height = img.height;
+
+      ctx.drawImage(img, 0, 0);
+      hiddenCtx.drawImage(img, 0, 0);
+      palleteCtx.drawImage(palleteImg, 0, 0);
+    };
+
+    if (img.complete) {
+      img.onload(); // image already loaded from cache
+    }
+
+    referenceImg.onload = () => {
+      const referenceCanvas = document.getElementById('referenceCanvas');
+      const referenceCtx = referenceCanvas.getContext('2d', { willReadFrequently: true });
+
+      referenceCanvas.width = referenceImg.width;
+      referenceCanvas.height = referenceImg.height;
+      referenceCtx.drawImage(referenceImg, 0, 0);
+
+      console.log("✅ Reference image loaded into hidden canvas");
+    };
+
+    let palettes = null;
+    let mappings = null;
+
+    Promise.all([
+      fetch(files.palettesJson).then(r => r.json()),
+      fetch(files.mappingsJson).then(r => r.json())
+    ]).then(([paletteData, mappingData]) => {
+      palettes = paletteData;
+      mappings = mappingData;
+
+      const originalOption = document.createElement('option');
+      originalOption.value = -1;
+      originalOption.textContent = "Original";
+      selector.appendChild(originalOption);
+
+      mappings.forEach((map, i) => {
+        const option = document.createElement('option');
+        option.value = i;
+        option.textContent = map.name;
+        selector.appendChild(option);
+      });
+
+      selector.value = -1;
+
+      canvas.addEventListener('click', function (e) {
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        const x = Math.floor((e.clientX - rect.left) * scaleX);
+        const y = Math.floor((e.clientY - rect.top) * scaleY);
+
+        const referenceCanvas = document.getElementById('referenceCanvas');
+        const referenceCtx = referenceCanvas.getContext('2d', { willReadFrequently: true });
+        const pixel = referenceCtx.getImageData(x, y, 1, 1).data;
+
+        const [r, g, b] = [pixel[0], pixel[1], pixel[2]];
+        console.log(`Clicked color: (${r}, ${g}, ${b})`);
+
+        const clickedIndex = 256 * g + b;
+
+        if (clickedIndex !== 65535) {
+          console.log(`Clicked color matched input palette index ${clickedIndex}`);
+          selector.value = clickedIndex;
+          applyPaletteMapping(clickedIndex);
+        } else {
+          console.warn(`Clicked color does not match any input palette color. Reverting to Original.`);
+          selector.value = -1;
+          applyPaletteMapping(-1);
+        }
+      });
+    });
+
+    selector.addEventListener('change', () => {
+      applyPaletteMapping(parseInt(selector.value));
+    });
+
+    function applyPaletteMapping(mappingIndex) {
+      ctx.drawImage(img, 0, 0);
+      if (!palettes || !mappings) return;
+
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imageData.data;
+
+      if (mappingIndex === -1) {
+        ctx.putImageData(imageData, 0, 0);
+        return;
+      }
+
+      const outputPalette = mappings[mappingIndex].mapping.map(i => palettes.output[i]);
+      const palleteData = palleteCtx.getImageData(0, 0, canvas.width, canvas.height).data;
+
+      let matchedAny = false;
+
+      for (let i = 0; i < data.length; i += 4) {
+        const r = palleteData[i];
+        const g = palleteData[i + 1];
+        const b = palleteData[i + 2];
+        const a = palleteData[i + 3];
+
+        if ((r === 255 && g === 255 && b === 255) || a === 0) {
+          continue;
+        }
+
+        const index = g * 256 + b;
+
+        if (index >= 0 && index < mappings[mappingIndex].mapping.length) {
+          const outputIndex = mappings[mappingIndex].mapping[index];
+
+          if (outputIndex >= 0 && outputIndex < palettes.output.length) {
+            const [ro, go, bo] = palettes.output[outputIndex];
+            data[i] = ro;
+            data[i + 1] = go;
+            data[i + 2] = bo;
+            matchedAny = true;
+          }
+        }
+      }
+
+      if (!matchedAny) {
+        console.warn("No matching palette pixels found. Check overlay.png and palette mappings.");
+      }
+
+      ctx.putImageData(imageData, 0, 0);
+    }
+  </script>
+</body>
+</html>
