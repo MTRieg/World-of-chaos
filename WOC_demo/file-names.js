@@ -5,5 +5,5 @@ export const files = {
   baseImage: "./files/no-outline.png",
   swapRefImage: "./files/swap-ref.png",
   palettesJson: "./files/palettes.json",
-  mappingsJson: "./files/mappings_20250607_181014.json",
+  mappingsJson: "./files/mappings_20250607_182138.json",
 };
