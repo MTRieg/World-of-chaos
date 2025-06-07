@@ -53,9 +53,7 @@
 
   <script type="module">
 
-    //the comment below helps the preprocessor to change the location of the file showing all the file names
-    //This needs to happen so that your computer doesn't try to use your cache on a file that has different contents than it used to.
-    //<!-- @replace:import -->
+    
     import { files } from './file-names.js';
 
     const canvas = document.getElementById('canvas');
@@ -72,7 +70,7 @@
 
     // Load Reference Image
     const referenceImg = new Image();
-    referenceImg.src = files.referenceImage;
+    referenceImg.src = files.clickableImage;
     referenceImg.crossOrigin = "anonymous";
 
     // Load Base Image
@@ -82,7 +80,7 @@
 
     // Load Palette Overlay Image
     const palleteImg = new Image();
-    palleteImg.src = files.swapRef;
+    palleteImg.src = files.swapRefImage;
     palleteImg.crossOrigin = "anonymous";
 
     img.onload = () => {
