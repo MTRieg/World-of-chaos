@@ -1,0 +1,23 @@
+{
+  "name": "everything",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@octokit/rest": "^22.0.0",
+    "@xmldom/xmldom": "^0.9.8",
+    "adm-zip": "^0.5.16",
+    "discord.js": "^14.19.3",
+    "dotenv": "^16.5.0",
+    "fs": "^0.0.1-security",
+    "node-fetch": "^3.3.2",
+    "sharp": "^0.34.2",
+    "tinycolor2": "^1.6.0",
+    "xpath": "^0.0.34"
+  }
+}
