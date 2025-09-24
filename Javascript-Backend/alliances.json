@@ -1,0 +1,1206 @@
+[
+    {
+        "name": "Amami",
+        "alliance": "Ashikaga Shogunate"
+    },
+    {
+        "name": "Fusan",
+        "alliance": "Ashikaga Shogunate"
+    },
+    {
+        "name": "Macao",
+        "alliance": "Golden Federation"
+    },
+    {
+        "name": "Akwa'ala",
+        "alliance": ""
+    },
+    {
+        "name": "Aleuts",
+        "alliance": "Super Canada"
+    },
+    {
+        "name": "Ayoreo",
+        "alliance": "The Hive"
+    },
+    {
+        "name": "Bermuda",
+        "alliance": "Pirates of the Caribbean"
+    },
+    {
+        "name": "Cebu",
+        "alliance": "MTF"
+    },
+    {
+        "name": "Chengdu",
+        "alliance": "Ashikaga Shogunate"
+    },
+    {
+        "name": "Chiloe",
+        "alliance": "Hornet's Nest"
+    },
+    {
+        "name": "Evens",
+        "alliance": "Kamchatkams"
+    },
+    {
+        "name": "Makassar",
+        "alliance": "MTF"
+    },
+    {
+        "name": "Mali",
+        "alliance": "Western Star"
+    },
+    {
+        "name": "Marseille",
+        "alliance": "Kingdom of France"
+    },
+    {
+        "name": "Mauritsstad",
+        "alliance": ""
+    },
+    {
+        "name": "Phan Rang",
+        "alliance": "Golden Federation"
+    },
+    {
+        "name": "Port Royal",
+        "alliance": ""
+    },
+    {
+        "name": "Quebec",
+        "alliance": "Death Row Alliance"
+    },
+    {
+        "name": "Salliq",
+        "alliance": ""
+    },
+    {
+        "name": "St. Anthony",
+        "alliance": "The North Sea Empire"
+    },
+    {
+        "name": "Xining",
+        "alliance": ""
+    },
+    {
+        "name": "Yokuts",
+        "alliance": "Ute - Shoshone Alliance (USA)"
+    },
+    {
+        "name": "Banda",
+        "alliance": "The Line (TCL)"
+    },
+    {
+        "name": "Bogota",
+        "alliance": "Granola"
+    },
+    {
+        "name": "Chilcotin",
+        "alliance": "Super Canada"
+    },
+    {
+        "name": "Dena'ina",
+        "alliance": "Super Canada"
+    },
+    {
+        "name": "Florence",
+        "alliance": "LIGMA"
+    },
+    {
+        "name": "Helsingfors",
+        "alliance": "Orthodox Juggernaut"
+    },
+    {
+        "name": "Kereks",
+        "alliance": "Kamchatkams"
+    },
+    {
+        "name": "Kolkata",
+        "alliance": "United Nations of India"
+    },
+    {
+        "name": "Lakota",
+        "alliance": "Great Plains Federation (GPF)"
+    },
+    {
+        "name": "Manado",
+        "alliance": "MTF"
+    },
+    {
+        "name": "Minas Gerais",
+        "alliance": "The Hive"
+    },
+    {
+        "name": "Mpondo",
+        "alliance": "Ravinala"
+    },
+    {
+        "name": "Quito",
+        "alliance": "Granola"
+    },
+    {
+        "name": "Sahtu",
+        "alliance": "Super Canada"
+    },
+    {
+        "name": "Tavoy",
+        "alliance": "Golden Federation"
+    },
+    {
+        "name": "Ayutthaya",
+        "alliance": "Golden Federation"
+    },
+    {
+        "name": "Baidoa",
+        "alliance": "Pirate Parley"
+    },
+    {
+        "name": "Bratsk",
+        "alliance": "Baikal Besties"
+    },
+    {
+        "name": "Bremen",
+        "alliance": "The North Sea Empire"
+    },
+    {
+        "name": "Burundi",
+        "alliance": "Pirate Parley"
+    },
+    {
+        "name": "Charrua",
+        "alliance": "The Hive"
+    },
+    {
+        "name": "Chipewyan",
+        "alliance": "Super Canada"
+    },
+    {
+        "name": "Cochin",
+        "alliance": "United Nations of India"
+    },
+    {
+        "name": "Enticosty",
+        "alliance": ""
+    },
+    {
+        "name": "Fernando Po",
+        "alliance": "Guinea Pigs"
+    },
+    {
+        "name": "Flores",
+        "alliance": "MTF"
+    },
+    {
+        "name": "Gdansk",
+        "alliance": "The North Sea Empire"
+    },
+    {
+        "name": "Gothenburg",
+        "alliance": "The North Sea Empire"
+    },
+    {
+        "name": "Great Ardra",
+        "alliance": "Guinea Pigs"
+    },
+    {
+        "name": "Haishenwai",
+        "alliance": "Council of Wisdom"
+    },
+    {
+        "name": "Hanyang",
+        "alliance": "Ashikaga Shogunate"
+    },
+    {
+        "name": "Hausa States",
+        "alliance": "Guinea Pigs"
+    },
+    {
+        "name": "Kabardia",
+        "alliance": "Orthodox Juggernaut"
+    },
+    {
+        "name": "Khiva",
+        "alliance": "Migrating Horde"
+    },
+    {
+        "name": "Krasnoyarsk",
+        "alliance": "Baikal Besties"
+    },
+    {
+        "name": "Lisbon",
+        "alliance": "Better Iberians"
+    },
+    {
+        "name": "Nakhon Si",
+        "alliance": "Golden Federation"
+    },
+    {
+        "name": "Nanjing",
+        "alliance": ""
+    },
+    {
+        "name": "Naples",
+        "alliance": "LIGMA"
+    },
+    {
+        "name": "New Courland",
+        "alliance": "Pirates of the Caribbean"
+    },
+    {
+        "name": "Niani",
+        "alliance": "Western Star"
+    },
+    {
+        "name": "Ochakiv",
+        "alliance": "Orthodox Juggernaut"
+    },
+    {
+        "name": "Ouagadougou",
+        "alliance": "Western Star"
+    },
+    {
+        "name": "Papinachois",
+        "alliance": "Death Row Alliance"
+    },
+    {
+        "name": "Paris",
+        "alliance": "Kingdom of France"
+    },
+    {
+        "name": "Philadelphia",
+        "alliance": "Atlantis"
+    },
+    {
+        "name": "Portland",
+        "alliance": "Atlantis"
+    },
+    {
+        "name": "Qiqihar",
+        "alliance": "Council of Wisdom"
+    },
+    {
+        "name": "Qom",
+        "alliance": "The Hive"
+    },
+    {
+        "name": "Reunion",
+        "alliance": "United Nations of India"
+    },
+    {
+        "name": "Shoshone",
+        "alliance": "Ute - Shoshone Alliance (USA)"
+    },
+    {
+        "name": "Smyrna",
+        "alliance": "Orthodox Juggernaut"
+    },
+    {
+        "name": "Soyo",
+        "alliance": "The Line (TCL)"
+    },
+    {
+        "name": "St. Helena",
+        "alliance": "Liberator of the French"
+    },
+    {
+        "name": "St. John's",
+        "alliance": ""
+    },
+    {
+        "name": "Trieste",
+        "alliance": "Holy Roman Thempire"
+    },
+    {
+        "name": "Tripoli",
+        "alliance": ""
+    },
+    {
+        "name": "Trondheim",
+        "alliance": "The North Sea Empire"
+    },
+    {
+        "name": "Turfan",
+        "alliance": "Baikal Besties"
+    },
+    {
+        "name": "Umea",
+        "alliance": "The North Sea Empire"
+    },
+    {
+        "name": "Venice",
+        "alliance": "Holy Roman Empire"
+    },
+    {
+        "name": "Verkhoturye",
+        "alliance": ""
+    },
+    {
+        "name": "Warsaw",
+        "alliance": "Orthodox Juggernaut"
+    },
+    {
+        "name": "Zanzibar",
+        "alliance": "Pirate Parley"
+    },
+    {
+        "name": "Andaman Islands",
+        "alliance": ""
+    },
+    {
+        "name": "Arkhangelsk",
+        "alliance": "Orthodox Juggernaut"
+    },
+    {
+        "name": "Bahamas",
+        "alliance": "Pirates of the Caribbean"
+    },
+    {
+        "name": "Bakchisarai",
+        "alliance": "Orthodox Juggernaut"
+    },
+    {
+        "name": "Barcelona",
+        "alliance": "Spain"
+    },
+    {
+        "name": "Bavaria",
+        "alliance": "Holy Roman Empire"
+    },
+    {
+        "name": "Bhamo",
+        "alliance": ""
+    },
+    {
+        "name": "Brandenburg",
+        "alliance": ""
+    },
+    {
+        "name": "Chiripa",
+        "alliance": "The Hive"
+    },
+    {
+        "name": "Edinburgh",
+        "alliance": "The North Sea Empire"
+    },
+    {
+        "name": "Freiburg",
+        "alliance": "LIGMA"
+    },
+    {
+        "name": "Galapagos",
+        "alliance": "Granola"
+    },
+    {
+        "name": "Gibraltar",
+        "alliance": "Spain"
+    },
+    {
+        "name": "Hailanpao",
+        "alliance": "Council of Wisdom"
+    },
+    {
+        "name": "Hanoi",
+        "alliance": "Golden Federation"
+    },
+    {
+        "name": "Idjil",
+        "alliance": "Western Star"
+    },
+    {
+        "name": "Innsbruck",
+        "alliance": "Holy Roman Empire"
+    },
+    {
+        "name": "Ioway",
+        "alliance": "Great Plains Federation (GPF)"
+    },
+    {
+        "name": "Ireland",
+        "alliance": "The North Sea Empire"
+    },
+    {
+        "name": "Jamestown",
+        "alliance": "Atlantis"
+    },
+    {
+        "name": "Kota Batu",
+        "alliance": "MTF"
+    },
+    {
+        "name": "Kyoto",
+        "alliance": "Ashikaga Shogunate"
+    },
+    {
+        "name": "Mahra",
+        "alliance": "ARRAKIS"
+    },
+    {
+        "name": "Manila",
+        "alliance": "MTF"
+    },
+    {
+        "name": "Mareeg",
+        "alliance": "Pirate Parley"
+    },
+    {
+        "name": "Masulipatnam",
+        "alliance": "United Nations of India"
+    },
+    {
+        "name": "Mogadishu",
+        "alliance": "Pirate Parley"
+    },
+    {
+        "name": "Mohawk",
+        "alliance": "Atlantis"
+    },
+    {
+        "name": "Moscow",
+        "alliance": "Orthodox Juggernaut"
+    },
+    {
+        "name": "Muscat",
+        "alliance": "ARRAKIS"
+    },
+    {
+        "name": "Naskapi",
+        "alliance": ""
+    },
+    {
+        "name": "Ndakaaru",
+        "alliance": "Western Star"
+    },
+    {
+        "name": "New Amsterdam",
+        "alliance": "Atlantis"
+    },
+    {
+        "name": "Oxford",
+        "alliance": "The North Sea Empire"
+    },
+    {
+        "name": "Pango",
+        "alliance": "The Line (TCL)"
+    },
+    {
+        "name": "Pegu",
+        "alliance": "Golden Federation"
+    },
+    {
+        "name": "Quaqtaq",
+        "alliance": ""
+    },
+    {
+        "name": "Rio de Janeiro",
+        "alliance": "The Hive"
+    },
+    {
+        "name": "Sahaliyan",
+        "alliance": "Ashikaga Shogunate"
+    },
+    {
+        "name": "Sakalava",
+        "alliance": "Ravinala"
+    },
+    {
+        "name": "Salvador",
+        "alliance": "The Hive"
+    },
+    {
+        "name": "Sambas",
+        "alliance": "MTF"
+    },
+    {
+        "name": "Sanaa",
+        "alliance": "ARRAKIS"
+    },
+    {
+        "name": "Sarajevo",
+        "alliance": "Orthodox Juggernaut"
+    },
+    {
+        "name": "Sicily",
+        "alliance": "LIGMA"
+    },
+    {
+        "name": "Spitsbergen",
+        "alliance": "The North Sea Empire"
+    },
+    {
+        "name": "St. Augustine",
+        "alliance": "Pirates of the Caribbean"
+    },
+    {
+        "name": "Tbilisi",
+        "alliance": "Orthodox Juggernaut"
+    },
+    {
+        "name": "Wilno",
+        "alliance": "Orthodox Juggernaut"
+    },
+    {
+        "name": "Yupik",
+        "alliance": "Super Canada"
+    },
+    {
+        "name": "Islas Malvinas",
+        "alliance": "MTF"
+    },
+    {
+        "name": "Japura",
+        "alliance": "The Hive"
+    },
+    {
+        "name": "Bandar Abbas",
+        "alliance": "Migrating Horde"
+    },
+    {
+        "name": "Delagoa",
+        "alliance": "Ravinala"
+    },
+    {
+        "name": "Iceland",
+        "alliance": "The North Sea Empire"
+    },
+    {
+        "name": "Missouri",
+        "alliance": "Great Plains Federation (GPF)"
+    },
+    {
+        "name": "Rabat",
+        "alliance": ""
+    },
+    {
+        "name": "Saltillo",
+        "alliance": "Mexican Empire"
+    },
+    {
+        "name": "Tlicho",
+        "alliance": "Super Canada"
+    },
+    {
+        "name": "Zamboanga",
+        "alliance": "MTF"
+    },
+    {
+        "name": "Arguin",
+        "alliance": "Western Star"
+    },
+    {
+        "name": "Baleares",
+        "alliance": "LIGMA"
+    },
+    {
+        "name": "Bara",
+        "alliance": "Ravinala"
+    },
+    {
+        "name": "Barbados",
+        "alliance": "Pirates of the Caribbean"
+    },
+    {
+        "name": "Brattahlid",
+        "alliance": ""
+    },
+    {
+        "name": "Cap-Haitien",
+        "alliance": "Pirates of the Caribbean"
+    },
+    {
+        "name": "Cape Khoe",
+        "alliance": "The Line (TCL)"
+    },
+    {
+        "name": "Christiania",
+        "alliance": "The North Sea Empire"
+    },
+    {
+        "name": "Chukchis",
+        "alliance": "Kamchatkams"
+    },
+    {
+        "name": "Constantinople",
+        "alliance": "Orthodox Juggernaut"
+    },
+    {
+        "name": "Edo",
+        "alliance": "Ashikaga Shogunate"
+    },
+    {
+        "name": "Fort Detroit",
+        "alliance": "Great Plains Federation (GPF)"
+    },
+    {
+        "name": "Fort-Dauphin",
+        "alliance": "United Nations of India"
+    },
+    {
+        "name": "Godthaab",
+        "alliance": ""
+    },
+    {
+        "name": "Gulumoerrgin",
+        "alliance": "MTF"
+    },
+    {
+        "name": "Hyderabad",
+        "alliance": ""
+    },
+    {
+        "name": "Jamaica",
+        "alliance": "Pirates of the Caribbean"
+    },
+    {
+        "name": "Jassy",
+        "alliance": ""
+    },
+    {
+        "name": "Kanem-Bornu",
+        "alliance": "Guinea Pigs"
+    },
+    {
+        "name": "Konigsberg",
+        "alliance": "The North Sea Empire"
+    },
+    {
+        "name": "Koryaks",
+        "alliance": "Kamchatkams"
+    },
+    {
+        "name": "Kuujjuaq",
+        "alliance": ""
+    },
+    {
+        "name": "Luxembourg",
+        "alliance": "Kingdom of France"
+    },
+    {
+        "name": "Madurai",
+        "alliance": "United Nations of India"
+    },
+    {
+        "name": "Mandara",
+        "alliance": ""
+    },
+    {
+        "name": "Mek'ele",
+        "alliance": "Evergreen"
+    },
+    {
+        "name": "Nantes",
+        "alliance": "Kingdom of France"
+    },
+    {
+        "name": "Novgorod",
+        "alliance": "Orthodox Juggernaut"
+    },
+    {
+        "name": "Parmurbo",
+        "alliance": "YMCA"
+    },
+    {
+        "name": "Porto",
+        "alliance": "Better Iberians"
+    },
+    {
+        "name": "Quella Kollu",
+        "alliance": "The Hive"
+    },
+    {
+        "name": "Riyadh",
+        "alliance": "ARRAKIS"
+    },
+    {
+        "name": "Sao Tome",
+        "alliance": "Guinea Pigs"
+    },
+    {
+        "name": "Split",
+        "alliance": "Orthodox Juggernaut"
+    },
+    {
+        "name": "Surat",
+        "alliance": "United Nations of India"
+    },
+    {
+        "name": "Valencia",
+        "alliance": "Spain"
+    },
+    {
+        "name": "Ville Marie",
+        "alliance": ""
+    },
+    {
+        "name": "Ahmedabad",
+        "alliance": "United Nations of India"
+    },
+    {
+        "name": "Aksum",
+        "alliance": "Evergreen"
+    },
+    {
+        "name": "Aotearoa",
+        "alliance": "MTF"
+    },
+    {
+        "name": "Beira",
+        "alliance": "Ravinala"
+    },
+    {
+        "name": "Benin",
+        "alliance": "Guinea Pigs"
+    },
+    {
+        "name": "Chiang Mai",
+        "alliance": "Golden Federation"
+    },
+    {
+        "name": "Cormantin",
+        "alliance": "Western Star"
+    },
+    {
+        "name": "Dani",
+        "alliance": "MTF"
+    },
+    {
+        "name": "Marrakech",
+        "alliance": "Western Star"
+    },
+    {
+        "name": "Mbanza",
+        "alliance": "The Line (TCL)"
+    },
+    {
+        "name": "Panama",
+        "alliance": "Granola"
+    },
+    {
+        "name": "Riga",
+        "alliance": "Orthodox Juggernaut"
+    },
+    {
+        "name": "Sumatra",
+        "alliance": "MTF"
+    },
+    {
+        "name": "Tutchone",
+        "alliance": "Super Canada"
+    },
+    {
+        "name": "Bukhara",
+        "alliance": "Migrating Horde"
+    },
+    {
+        "name": "Cartagena",
+        "alliance": "Granola"
+    },
+    {
+        "name": "Cayenne",
+        "alliance": "YMCA"
+    },
+    {
+        "name": "Debre Birhan",
+        "alliance": "Evergreen"
+    },
+    {
+        "name": "Rinpungpa",
+        "alliance": "United Nations of India"
+    },
+    {
+        "name": "Vienna",
+        "alliance": "Holy Roman Thempire"
+    },
+    {
+        "name": "Amsterdam",
+        "alliance": "The North Sea Empire"
+    },
+    {
+        "name": "Aomori",
+        "alliance": "Ashikaga Shogunate"
+    },
+    {
+        "name": "Arapaho",
+        "alliance": "Mexican Empire"
+    },
+    {
+        "name": "Astrakhan",
+        "alliance": "Orthodox Juggernaut"
+    },
+    {
+        "name": "Ava",
+        "alliance": "Golden Federation"
+    },
+    {
+        "name": "Baghdad",
+        "alliance": "Orthodox Juggernaut"
+    },
+    {
+        "name": "Ballari",
+        "alliance": "United Nations of India"
+    },
+    {
+        "name": "Barotse",
+        "alliance": "Ravinala"
+    },
+    {
+        "name": "Belem",
+        "alliance": "YMCA"
+    },
+    {
+        "name": "Canaries",
+        "alliance": "Western Star"
+    },
+    {
+        "name": "Ceylon",
+        "alliance": "United Nations of India"
+    },
+    {
+        "name": "Chipaya",
+        "alliance": "The Hive"
+    },
+    {
+        "name": "Delhi",
+        "alliance": "United Nations of India"
+    },
+    {
+        "name": "Derbent",
+        "alliance": "Orthodox Juggernaut"
+    },
+    {
+        "name": "Formosa",
+        "alliance": "Ashikaga Shogunate"
+    },
+    {
+        "name": "Ghent",
+        "alliance": "The North Sea Empire"
+    },
+    {
+        "name": "Hainan",
+        "alliance": "Golden Federation"
+    },
+    {
+        "name": "Hawwara",
+        "alliance": "Evergreen"
+    },
+    {
+        "name": "Huarpe",
+        "alliance": "Hornet's Nest"
+    },
+    {
+        "name": "Ikh Khuree",
+        "alliance": "Baikal Besties"
+    },
+    {
+        "name": "Isfahan",
+        "alliance": "Migrating Horde"
+    },
+    {
+        "name": "Jacob Fort",
+        "alliance": "Western Star"
+    },
+    {
+        "name": "Kabul",
+        "alliance": "United Nations of India"
+    },
+    {
+        "name": "Kharkov",
+        "alliance": "Orthodox Juggernaut"
+    },
+    {
+        "name": "Kiel",
+        "alliance": "The North Sea Empire"
+    },
+    {
+        "name": "Lima",
+        "alliance": "Granola"
+    },
+    {
+        "name": "Lubeck",
+        "alliance": "The North Sea Empire"
+    },
+    {
+        "name": "Madeira",
+        "alliance": "The Hive"
+    },
+    {
+        "name": "Madras",
+        "alliance": "United Nations of India"
+    },
+    {
+        "name": "Madrid",
+        "alliance": "Spain"
+    },
+    {
+        "name": "Miwok",
+        "alliance": "Ute - Shoshone Alliance (USA)"
+    },
+    {
+        "name": "Mpemba",
+        "alliance": "The Line (TCL)"
+    },
+    {
+        "name": "Nivikhs",
+        "alliance": "Council of Wisdom"
+    },
+    {
+        "name": "Nuremberg",
+        "alliance": "Holy Roman Empire"
+    },
+    {
+        "name": "Okinawa",
+        "alliance": "Ashikaga Shogunate"
+    },
+    {
+        "name": "Plymouth",
+        "alliance": "The North Sea Empire"
+    },
+    {
+        "name": "Rajamahendri",
+        "alliance": "United Nations of India"
+    },
+    {
+        "name": "Rankulche",
+        "alliance": "The Hive"
+    },
+    {
+        "name": "Sao Sebastiao",
+        "alliance": "The Hive"
+    },
+    {
+        "name": "Sardinia",
+        "alliance": "LIGMA"
+    },
+    {
+        "name": "Shengjing",
+        "alliance": "Council of Wisdom"
+    },
+    {
+        "name": "St. Domingo",
+        "alliance": "Pirates of the Caribbean"
+    },
+    {
+        "name": "St. Louis",
+        "alliance": "Western Star"
+    },
+    {
+        "name": "Stockholm",
+        "alliance": "The North Sea Empire"
+    },
+    {
+        "name": "Tabriz",
+        "alliance": "Orthodox Juggernaut"
+    },
+    {
+        "name": "Tangier",
+        "alliance": "Spain"
+    },
+    {
+        "name": "Targoviste",
+        "alliance": "Orthodox Juggernaut"
+    },
+    {
+        "name": "Timbuktu",
+        "alliance": "Western Star"
+    },
+    {
+        "name": "Tunis",
+        "alliance": "LIGMA"
+    },
+    {
+        "name": "Utrecht",
+        "alliance": "The North Sea Empire"
+    },
+    {
+        "name": "Uzgen",
+        "alliance": "Migrating Horde"
+    },
+    {
+        "name": "Weenhayek",
+        "alliance": "The Hive"
+    },
+    {
+        "name": "Yakutsk",
+        "alliance": "Council of Wisdom"
+    },
+    {
+        "name": "Azande",
+        "alliance": ""
+    },
+    {
+        "name": "Baracoa",
+        "alliance": "Pirates of the Caribbean"
+    },
+    {
+        "name": "Cabo Verde",
+        "alliance": "Western Star"
+    },
+    {
+        "name": "Gondar",
+        "alliance": "Evergreen"
+    },
+    {
+        "name": "Herat",
+        "alliance": "Migrating Horde"
+    },
+    {
+        "name": "Hobyo",
+        "alliance": "Pirate Parley"
+    },
+    {
+        "name": "Kalina",
+        "alliance": "YMCA"
+    },
+    {
+        "name": "Karakorum",
+        "alliance": "Baikal Besties"
+    },
+    {
+        "name": "Pyeongyang",
+        "alliance": "Ashikaga Shogunate"
+    },
+    {
+        "name": "Sasaram",
+        "alliance": "United Nations of India"
+    },
+    {
+        "name": "Maldives",
+        "alliance": "United Nations of India"
+    },
+    {
+        "name": "Agadez",
+        "alliance": "Guinea Pigs"
+    },
+    {
+        "name": "Buenos Aires",
+        "alliance": "Hornet's Nest"
+    },
+    {
+        "name": "Trebizond",
+        "alliance": "Orthodox Juggernaut"
+    },
+    {
+        "name": "Warsangali",
+        "alliance": "Pirate Parley"
+    },
+    {
+        "name": "Banjarmasin",
+        "alliance": "MTF"
+    },
+    {
+        "name": "Benguela",
+        "alliance": "The Line (TCL)"
+    },
+    {
+        "name": "Cairo",
+        "alliance": "Cairo"
+    },
+    {
+        "name": "Dijon",
+        "alliance": "Kingdom of France"
+    },
+    {
+        "name": "Pressburg",
+        "alliance": "Holy Roman Thempire"
+    },
+    {
+        "name": "Ainu",
+        "alliance": "Ashikaga Shogunate"
+    },
+    {
+        "name": "Amazon",
+        "alliance": "FOE"
+    },
+    {
+        "name": "Antigua",
+        "alliance": "Pirates of the Caribbean"
+    },
+    {
+        "name": "Apache",
+        "alliance": "Mexican Empire"
+    },
+    {
+        "name": "Belize",
+        "alliance": "Mexican Empire"
+    },
+    {
+        "name": "Boston",
+        "alliance": "Atlantis"
+    },
+    {
+        "name": "Bunyoro",
+        "alliance": "Pirate Parley"
+    },
+    {
+        "name": "Catawba",
+        "alliance": "Great Plains Federation (GPF)"
+    },
+    {
+        "name": "Cherokee",
+        "alliance": "Great Plains Federation (GPF)"
+    },
+    {
+        "name": "Chiquitano",
+        "alliance": "The Hive"
+    },
+    {
+        "name": "Chitimacha",
+        "alliance": "Pirates of the Caribbean"
+    },
+    {
+        "name": "Corse",
+        "alliance": "LIGMA"
+    },
+    {
+        "name": "Cree",
+        "alliance": "Great Plains Federation (GPF)"
+    },
+    {
+        "name": "Gosiute",
+        "alliance": "Ute - Shoshone Alliance (USA)"
+    },
+    {
+        "name": "Hawai'i",
+        "alliance": "Ute - Shoshone Alliance (USA)"
+    },
+    {
+        "name": "Kathmandu",
+        "alliance": "United Nations of India"
+    },
+    {
+        "name": "Mexico City",
+        "alliance": "Mexican Empire"
+    },
+    {
+        "name": "Minuane",
+        "alliance": "The Hive"
+    },
+    {
+        "name": "Nokugo",
+        "alliance": "The Hive"
+    },
+    {
+        "name": "Oji-Cree",
+        "alliance": ""
+    },
+    {
+        "name": "Puerto Rico",
+        "alliance": "Pirates of the Caribbean"
+    },
+    {
+        "name": "Rustaq",
+        "alliance": "ARRAKIS"
+    },
+    {
+        "name": "Seneca",
+        "alliance": "Atlantis"
+    },
+    {
+        "name": "St. Maarten",
+        "alliance": "Pirates of the Caribbean"
+    },
+    {
+        "name": "Tucapel",
+        "alliance": "Hornet's Nest"
+    }
+]
